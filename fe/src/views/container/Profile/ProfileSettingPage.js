@@ -14,29 +14,21 @@ const ProfileSystem = (props) => {
    const [avatar, setAvatar] = useState("");
    const [name, setName] = useState("");
    const [email, setEmail] = useState("");
-
-   const handleSubmit = () => {
-      const body = {
-         idAccount: props.profile?.idAccount,
-         avatar: avatar ? avatar : props.profile.avatar,
-         name: name ? name : props.profile.name
-      };
-      props
-         .updateProfile(body)
-         .then((res) => {
-            message.success("Cập nhật thành công");
-         })
-         .catch((err) => {
-            message.error("Cập nhật thất bại");
-         });
-   };
+   const [phone, setPhone] = useState("");
+   const [address, setAddress] = useState("");
 
    const handleChange = (e, field) => {
+      //e: phần tử, field: 1 dòng
       switch (field) {
          case "name":
             setName(e.target?.value || "");
             break;
-
+         case "phone":
+            setPhone(e.target?.value || "");
+            break;
+         case "address":
+            setAddress(e.target?.value || "");
+            break;
          default:
             break;
       }
@@ -46,8 +38,28 @@ const ProfileSystem = (props) => {
       if (props.profile?.email) {
          setName(props.profile?.name);
          setEmail(props.profile?.email);
+         setPhone(props.profile?.phone);
+         setAddress(props.profile?.address);
       }
    }, [props.profile?.email]);
+
+   const handleSubmit = () => {
+      const body = {
+         idAccount: props.profile?.idAccount,
+         avatar: avatar ? avatar: props.profile?.avatar,
+         name: name ? name: props.profile?.name,
+         phone: phone? phone: props.profile?.phone,
+         address: address? address: props.profile?.address
+      }
+      props
+      .updateProfile(body)
+      .then((res) => {
+         message.success("Cập nhật thành công!");
+      })
+      .catch((err)=>{
+         message.error("Cập nhật thất bại!");
+      })
+   }
 
    return (
       <ProfileSystemStyled>
@@ -87,11 +99,12 @@ const ProfileSystem = (props) => {
                                  <div className='form-group'>
                                     <span className='la la-envelope form-icon' />
                                     <input
-                                       onChange={(e) => handleChange(e, "email")}
                                        className='form-control'
                                        type='text'
+                                       placeholder='Email'
                                        value={email}
                                        disabled
+                                       onChange={(e) => handleChange(e, "email")}
                                     />
                                  </div>
                               </div>
@@ -102,7 +115,14 @@ const ProfileSystem = (props) => {
                                  <label className='label-text'>Phone</label>
                                  <div className='form-group'>
                                     <span className='la la-phone form-icon' />
-                                    <input className='form-control' type='text' defaultValue='+ 00 222 44 5678' />
+                                    <input
+                                       className='form-control'
+                                       type='text'
+                                       value={phone}
+                                       onChange={(e) => {
+                                          handleChange(e, "phone");
+                                       }}
+                                    />
                                  </div>
                               </div>
                            </div>
@@ -112,14 +132,19 @@ const ProfileSystem = (props) => {
                                  <label className='label-text'>Address</label>
                                  <div className='form-group'>
                                     <span className='la la-map form-icon' />
-                                    <input className='form-control' type='text' defaultValue='124/6 Street view, USA' />
+                                    <input
+                                       className='form-control'
+                                       type='text'
+                                       value={address}
+                                       onChange={(e) => handleChange(e, "address")}
+                                    />
                                  </div>
                               </div>
                            </div>
                            {/* end col-lg-6 */}
                            <div className='col-lg-12'>
                               <div className='btn-box'>
-                                 <button className='theme-btn' type='button' onClick={handleSubmit}>
+                                 <button className='theme-btn' type='button'>
                                     Lưu thông tin
                                  </button>
                               </div>

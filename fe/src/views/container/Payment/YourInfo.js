@@ -8,12 +8,17 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 const YourInfoStyled = styled.div``;
 
 function YourInfo(props) {
+   const [firstName, setFirstName] = useState("");
+   const [lasttName, setLastName] = useState("");
+   const [email, setEmail] = useState("");
+   const [phone, setPhone] = useState("");
+   const [address, setAddress] = useState("");
 
-   const [firstName, setFirstName] = useState('');
-   const [lasttName, setLastName] = useState('');
-   const [email, setEmail] = useState('');
-   const [phone, setPhone] = useState('');
-   const [address, setAddress] = useState('');
+   // useEffect(() => {
+   //    if (email) {
+   //       setEmail(email);
+   //    }
+   // }, [email]);
 
    return (
       <YourInfoStyled>
@@ -31,7 +36,7 @@ function YourInfo(props) {
                               <label className='label-text'>Họ</label>
                               <div className='form-group'>
                                  <span className='la la-user form-icon' />
-                                 <input onChange   className='form-control' type='text' name='text' placeholder='Họ' />
+                                 <input onChange className='form-control' type='text' name='text' placeholder='Họ' value={props.user?.name} />
                               </div>
                            </div>
                         </div>
@@ -51,7 +56,13 @@ function YourInfo(props) {
                               <label className='label-text'>Email</label>
                               <div className='form-group'>
                                  <span className='la la-envelope-o form-icon' />
-                                 <input className='form-control' type='email' name='email' placeholder='Email' />
+                                 <input
+                                    className='form-control'
+                                    type='email'
+                                    name='email'
+                                    placeholder='Email'
+                                    value={props.user?.email}
+                                 />
                               </div>
                            </div>
                         </div>

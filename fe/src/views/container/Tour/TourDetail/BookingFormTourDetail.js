@@ -18,6 +18,7 @@ const BookingFormTourDetailStyled = styled.div``;
 
 function BookingFormTourDetail(props) {
    const [numberPeople, setNumberPeople] = useState(1);
+
    return (
       <BookingFormTourDetailStyled>
          <div className='sidebar-widget single-content-widget'>
@@ -27,8 +28,7 @@ function BookingFormTourDetail(props) {
                      <span className='text-form'>Chỉ từ</span>
                      <span className='text-value ml-2 mr-1'>
                         {currencyFormat(
-                           props.tourDetail?.price * numberPeople -
-                              props.tourDetail?.price * props.tourDetail?.sale * 0.01 * numberPeople
+                           props.tourDetail?.price * numberPeople - props.tourDetail?.price * 0.01 * numberPeople
                         )}
                      </span>{" "}
                      {props.tourDetail?.sale > 0 ? (
@@ -90,9 +90,7 @@ function BookingFormTourDetail(props) {
             </div>
             {/* end sidebar-widget-item */}
             <div className='btn-box pt-2'>
-               <Link
-                  to={PATH.TOUR_BOOKING.replace(":id", props.tourDetail?.idTour) + parseObjToQuery({ numberPeople })}
-                  className='theme-btn text-center w-100 mb-2'>
+               <Link className='theme-btn text-center w-100 mb-2' to={PATH.TOUR_BOOKING.replace(":id", props.tourDetail?.idTour) + parseObjToQuery({numberPeople})}>
                   <i className='la la-shopping-cart mr-2 font-size-18' />
                   Đặt ngay
                </Link>
