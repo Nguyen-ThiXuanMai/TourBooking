@@ -71,7 +71,7 @@ function InfoBooking(props) {
                   <span>Room type:</span>Luxury View Suite
                </li>
                <li>
-                  <span>Client:</span>David Martin
+                  <span>Client:</span>{props.user?.name}
                </li>
             </ul>
          </div>

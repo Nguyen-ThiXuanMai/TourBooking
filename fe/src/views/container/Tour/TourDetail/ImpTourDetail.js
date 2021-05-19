@@ -30,9 +30,9 @@ function ImpTourDetail(props) {
    const [isModalVisibleImage, setIsModalVisibleImage] = useState(false);
 
    return (
-      <ImpTourDetailStyled backgroundImage={firstImage(_.head(props.tourDetail?.images)?.url || "")}>
+      <ImpTourDetailStyled>
          <section className='py-0 position-relative'>
-            <Image className='style-image ' src={firstImage(_.head(props.tourDetail?.images)?.url || "")} />
+            <Image className='style-image' src={firstImage(_.head(props.tourDetail?.images)?.url || "")} width='100%' height='100%' />
             <div className='position-absolute ' style={{ bottom: 32, left: 32 }}>
                <Button className='btn-image mx-2' onClick={() => setIsModalVisibleImage(true)}>
                   Hình ảnh
@@ -40,10 +40,7 @@ function ImpTourDetail(props) {
                <Button className='btn-video mx-2' onClick={() => setIsModalVisible(true)}>
                   Video
                </Button>
-               <VideoComponent
-                  isModalVisible={isModalVisible}
-                  onCancel={() => setIsModalVisible(false)}
-                  urlVideo={props.tourDetail?.video}
+               <VideoComponent isModalVisible={isModalVisible} onCancel={() => setIsModalVisible(false)} urlVideo={props.tourDetail?.video}
                />
                <ImageComponent
                   isModalVisibleImage={isModalVisibleImage}

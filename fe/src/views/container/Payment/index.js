@@ -10,6 +10,7 @@ import Footer from "../Footer";
 import TopBarTour from "../Tour/TopBarTour";
 import ImpPayment from "./ImpPayment";
 import { useHistory, useRouteMatch } from "react-router";
+import { authActions } from "~/state/ducks/authUser";
 
 const PaymentStyled = styled.div``;
 
@@ -45,7 +46,7 @@ function Payment(props) {
       <PaymentStyled>
          <Header />
          <TopBarTour />
-         <ImpPayment payment={payment} />
+         <ImpPayment payment={payment}/>
          <Footer />
       </PaymentStyled>
    );
@@ -57,6 +58,7 @@ export default connect(
    }),
    {
       getTour: appApisActions.getTour,
-      getAllImagesTour: appApisActions.getAllImagesTour
+      getAllImagesTour: appApisActions.getAllImagesTour,
+      getProfile: authActions.getProfile
    }
 )(Payment);

@@ -18,6 +18,7 @@ const ProfilePage = (props) => {
    useEffect(() => {
       props.getProfile(props.user?.idAccount).then(({ res }) => {
          setProfile(res);
+         console.log("maidev ~ file: index.js ~ line 21 ~ props.getProfile ~ res", res)
       });
    }, []);
 

@@ -9,22 +9,20 @@ function Avatar(props) {
    const [imageUrl, setImageUrl] = useState("");
 
    const handleChange = (info) => {
-      if (info.file.status === "uploading") {
+      if(info.file.status === "uploading") {
          setLoading(true);
          return;
       }
-      if (info.file.status === "done") {
+      if(info.file.status === "done") {
          setLoading(false);
          setImageUrl(info.file?.response?.nameFile);
-         props.setAvatar(info.file?.response?.nameFile);
+         props.setAvatar(info.file?.response.nameFile);
       }
-   };
+   }
 
-   // 
    useEffect(() => {
       setImageUrl(props.avatarAPI);
    }, [props.avatarAPI]);
-  
 
    const uploadButton = (
       <div>
@@ -32,7 +30,7 @@ function Avatar(props) {
          <div style={{ marginTop: 8 }}>Upload</div>
       </div>
    );
-   console.log("maidev ~ file: Avatar.js ~ line 27 ~ Avatar ~ [props.avatarAPI", props.avatarAPI)
+
    return (
       <Upload
          name='file'
